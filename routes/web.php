@@ -12,4 +12,8 @@ Route::get('/test', function () {
 
 Route::resource('users', TestController::class);
 
+Route::get('testing',function(){
+    return "testing";
+});
+
 
