@@ -13,7 +13,10 @@ Route::get('/test', function () {
 Route::resource('users', TestController::class);
 
 Route::get('testing', function () {
-    return "testing";
+    $num1=5;
+    $num2=8;
+    $sum=$num1+$num2;
+    return "the result".$sum;
 });
 
 Route::get('test1', function () {
