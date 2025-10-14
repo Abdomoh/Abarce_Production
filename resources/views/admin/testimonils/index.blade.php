@@ -1,0 +1,272 @@
+@extends('layouts.master2')
+@section('css')
+    <!-- Internal Data table css -->
+    <link href="{{ URL::asset('admin/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
+    <link href="{{ URL::asset('admin/plugins/datatable/css/buttons.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('admin/plugins/datatable/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" />
+    <link href="{{ URL::asset('admin/plugins/datatable/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('admin/plugins/datatable/css/responsive.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('admin/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('admin/plugins/prism/prism.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('admin/plugins/notify/css/notifIt.css') }}" rel="stylesheet" />
+@endsection
+@section('page-header')
+    <br>
+    <!-- breadcrumb -->
+    <div class="breadcrumb-header justify-content-between">
+        <div class="my-auto">
+            <div class="d-flex">
+                <h4 class="content-title mb-0 my-auto">اراء العملاء </h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                    ااضافة
+                    رأي عميل</span>
+            </div>
+        </div>
+
+    </div>
+    <!-- breadcrumb -->
+@endsection
+@section('content')
+    <!-- row -->
+    <div class="row">
+
+        <div class="col-xl-12">
+            <div class="card mg-b-20">
+                <div class="card-header pb-0">
+                    <div class="">
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal"><i
+                                class="fas fa-plus"></i>&nbsp;اضافة رأي العميل </button><br><br>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="example1" class="table key-buttons text-md-nowrap" data-page-length='5'>
+                            <thead>
+                                <tr>
+                                    <th class="border-bottom-0">#</th>
+                                    <th class="border-bottom-0"> اسم العميل</th>
+                                    <th class="border-bottom-0">الوصف الوظيفي</th>
+                                    <th class="border-bottom-0">الرسالة</th>
+
+                                    <th class="border-bottom-0"></th>
+                                    <th class="border-bottom-0"></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach ($testimonials as $testimonial)
+                                    <tr>
+                                        <td>{{ $testimonial->id }}</td>
+                                        <td>{{ $testimonial->name }}</td>
+                                        <td>{{ $testimonial->postion }}</td>
+                                        <td>{{ $testimonial->message }}</td>
+
+                                        <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                                data-target="#edit{{ $testimonial->id }}" title="">
+                                                <i class="fa fa-edit"></i></button></td>
+
+                                        <td>
+
+                                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                                                data-target="#delete{{ $testimonial->id }}" title="">
+                                                <i class="fa fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+
+                                    <!--  edit model -->
+                                    <div class="modal fade" id="edit{{ $testimonial->id }}" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title"
+                                                        id="exampleModalLabel">
+                                                        تعديل البيانات
+                                                    </h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+
+
+                                                    <form action="{{ route('testimonials.update', $testimonial->id) }}"
+                                                        class="p-5 bg-white" method="POST" enctype="multipart/form-data">
+                                                        {{ csrf_field() }}
+                                                        {{ method_field('PUT') }}
+
+                                                        <div class="form-group">
+                                                            <label class="control-label"> اسم العميل</label>
+                                                            <input type="text" name="name"
+                                                                value="{{ $testimonial->name }}" class="form-control" />
+                                                            <input id="id" type="hidden" name="id"
+                                                                class="form-control" value="{{ $testimonial->id }}">
+
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="control-label"> الوصف الوظيفي للعميل </label>
+                                                            <input type="text" name="postion"
+                                                                value="{{ $testimonial->postion }}" class="form-control" />
+                                                            <input id="id" type="hidden" name="id"
+                                                                class="form-control" value="{{ $testimonial->id }}">
+
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label"> رسالةة العميل </label>
+                                                            <textarea name="message" id="" class="form-control">{{ $testimonial->message }}</textarea>
+                                                            <input id="id" type="hidden" name="id"
+                                                                class="form-control" value="{{ $testimonial->id }}">
+
+                                                        </div>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-info btn-md ">تعديل</button>
+                                                    <button type="button" class="btn btn-secondary btn-md"
+                                                        data-dismiss="modal">اغلاق</button>
+                                                </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- end edit model -->
+
+                                    <!--  img- show -->
+                                    <div class="modal fade" id="img_show{{ $testimonial->id }}" tabindex="-1"
+                                        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+
+                                                <div class="modal-body">
+
+
+                                                    <center><img src="{{ '/storage/' . $testimonial->image }}"
+                                                            width="400px" class="rounded-circle"></center>
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- img show -->
+
+
+
+                                    <!-- Deleted -->
+                                    <div class="modal fade" id="delete{{ $testimonial->id }}" tabindex="-1"
+                                        role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title"
+                                                        id="exampleModalLabel">
+                                                        حذف بيانات العميل
+                                                    </h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="{{ route('testimonials.destroy', $testimonial->id) }}"
+                                                        method="post">
+                                                        {{ method_field('Delete') }}
+                                                        @csrf
+                                                        هل تريد حذف بيانات العميل ؟!
+                                                        <input id="id" type="hidden" name="id"
+                                                            class="form-control" value="{{ $testimonial->id }}">
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">اغلاق</button>
+                                                            <button type="submit" class="btn btn-danger">حذف
+                                                                البيانات</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- add -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">اضافة خدمة </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="{{ route('testimonials.store') }}" method="post" enctype="multipart/form-data"
+                            autocomplete="">
+                            {{ csrf_field() }}
+                            <div class="modal-body">
+
+                                <div class="form-group">
+                                    <label class="control-label">اسم العميل </label>
+                                    <input type="text" name="name" value="" class="form-control" />
+
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">الوصف الوظيفي </label>
+                                    <input type="text" name="postion" value="" class="form-control" />
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">رسالة العميل </label>
+                                    <textarea name="message" id="" class="form-control"></textarea>
+
+                                </div>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success btn-md">حفظ</button>
+                                <button type="button" class="btn btn-secondary btn-md"
+                                    data-dismiss="modal">اغلاق</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @endsection
+        @section('js')
+            <!-- Internal Select2 js-->
+
+
+            <script src="{{ URL::asset('admin/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+            <script src="{{ URL::asset('admin/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
+            <script src="{{ URL::asset('admin/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+            <script src="{{ URL::asset('admin/plugins/datatable/js/responsive.dataTables.min.js') }}"></script>
+            <script src="{{ URL::asset('admin/plugins/datatable/js/jquery.dataTables.js') }}"></script>
+            <script src="{{ URL::asset('admin/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
+            <script src="{{ URL::asset('admin/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
+            <script src="{{ URL::asset('admin/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
+            <script src="{{ URL::asset('admin/plugins/datatable/js/jszip.min.js') }}"></script>
+            <script src="{{ URL::asset('admin/plugins/datatable/js/pdfmake.min.js') }}"></script>
+            <script src="{{ URL::asset('admin/plugins/datatable/js/vfs_fonts.js') }}"></script>
+            <script src="{{ URL::asset('admin/plugins/datatable/js/buttons.html5.min.js') }}"></script>
+            <script src="{{ URL::asset('admin/plugins/datatable/js/buttons.print.min.js') }}"></script>
+            <script src="{{ URL::asset('admin/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
+            <script src="{{ URL::asset('admin/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+            <script src="{{ URL::asset('admin/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
+            <!--Internal  Datatable js -->
+            <script src="{{ URL::asset('admin/js/table-data.js') }}"></script>
+        @endsection
