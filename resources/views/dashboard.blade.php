@@ -8,7 +8,7 @@
     <div class="left-content">
         <div>
             <h5 class="main-content-title tx-12 mg-b-1 mg-b-lg-1">مرحبا بك</h5>
-            <p class="mg-b-0 tx-14">في موقعنا الالكتروني </p>
+            <p class="mg-b-0 tx-14">لوحة التحكم   </p>
         </div>
     </div>
     <div class="main-dashboard-header-right">
@@ -35,12 +35,12 @@
         <div class="card overflow-hidden sales-card bg-primary-gradient">
             <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                 <div class="">
-                    <h4 class="mb-3 tx-15 text-white">عدد المنتجات</h4>
+                    <h4 class="mb-3 tx-15 text-white">عدد المشاريع المنجزة</h4>
                 </div>
                 <div class="pb-0 mt-0">
                     <div class="d-flex">
                         <div class="">
-                            <h4 class="tx-20 font-weight-bold mb-1 text-white">2</h4>
+                            <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $projects_count }}</h4>
 
                         </div>
 
@@ -54,12 +54,12 @@
         <div class="card overflow-hidden sales-card bg-danger-gradient">
             <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                 <div class="">
-                    <h4 class="mb-3 tx-16 text-white"> الاصناف </h4>
+                    <h4 class="mb-3 tx-16 text-white"> الخدمات </h4>
                 </div>
                 <div class="pb-0 mt-0">
                     <div class="d-flex">
                         <div class="">
-                            <h4 class="tx-20 font-weight-bold mb-1 text-white">5</h4>
+                            <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $services_count }}</h4>
 
                         </div>
 
@@ -73,19 +73,19 @@
         <div class="card overflow-hidden sales-card bg-warning-gradient">
             <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
                 <div class="">
-                    <h6 class="mb-3 tx-16 text-white"> الطلبات</h6>
+                    <h6 class="mb-3 tx-16 text-white"> العملاء </h6>
                 </div>
                 <div class="pb-0 mt-0">
                     <div class="d-flex">
                         <div class="">
-                            <h4 class="tx-20 font-weight-bold mb-1 text-white">3</h4>
+                            <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $clients_count }}</h4>
 
                         </div>
 
                     </div>
                 </div>
             </div>
-            <span id="compositeline3" class="pt-1">5,10,5,20,22,12,15,18,20,15,8,12,22,5,10,12,22,15,16,10</span>
+            <span id="compositeline3" class="pt-1">5,10,5,20,22,12,15,41,20,15,8,12,22,5,10,12,22,15,16,10</span>
         </div>
     </div>
 
@@ -93,6 +93,25 @@
 
 
 
+    <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
+        <div class="card overflow-hidden sales-card bg-primary-gradient">
+            <div class="pl-3 pt-3 pr-3 pb-2 pt-0">
+                <div class="">
+                    <h4 class="mb-3 tx-15 text-white">عدد  رسائل الطلب</h4>
+                </div>
+                <div class="pb-0 mt-0">
+                    <div class="d-flex">
+                        <div class="">
+                            <h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $contact_count }}</h4>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
 
 
@@ -171,21 +190,7 @@
 @section('js')
 <!--Internal  Chart.bundle js -->
 <script src="{{URL::asset('admin/plugins/chart.js/Chart.bundle.min.js')}}"></script>
-<!-- Moment js -->
-<script src="{{URL::asset('admin/plugins/raphael/raphael.min.js')}}"></script>
-<!--Internal  Flot js-->
-<script src="{{URL::asset('admin/plugins/jquery.flot/jquery.flot.js')}}"></script>
-<script src="{{URL::asset('admin/plugins/jquery.flot/jquery.flot.pie.js')}}"></script>
-<script src="{{URL::asset('admin/plugins/jquery.flot/jquery.flot.resize.js')}}"></script>
-<script src="{{URL::asset('admin/plugins/jquery.flot/jquery.flot.categories.js')}}"></script>
-<script src="{{URL::asset('admin/js/dashboard.sampledata.js')}}"></script>
-<script src="{{URL::asset('admin/js/chart.flot.sampledata.js')}}"></script>
-<!--Internal Apexchart js-->
-<script src="{{URL::asset('admin/js/apexcharts.js')}}"></script>
-<!-- Internal Map -->
-<script src="{{URL::asset('admin/plugins/jqvmap/jquery.vmap.min.js')}}"></script>
-<script src="{{URL::asset('admin/plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
-<script src="{{URL::asset('admin/js/modal-popup.js')}}"></script>
+
 <!--Internal  index js -->
 <script src="{{URL::asset('admin/js/index.js')}}"></script>
 <script src="{{URL::asset('admin/js/jquery.vmap.sampledata.js')}}"></script>

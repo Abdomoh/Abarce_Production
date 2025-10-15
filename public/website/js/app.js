@@ -82,3 +82,24 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 observer.observe(clientsSection);
+/*
+detels project
+*/
+
+
+// Initialize AOS
+AOS.init({
+  duration: 1000,
+  once: true,
+  mirror: false,
+  offset: 100,
+});
+
+
+
+
+// Smooth scroll for back button
+document.querySelector('.back-btn').addEventListener('click', function(e) {
+  e.preventDefault();
+  window.location.href = this.getAttribute('href');
+});

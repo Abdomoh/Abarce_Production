@@ -2,17 +2,23 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\WebSite\LandingPage;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\SeetingController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\WorkMechanismController;
 use App\Http\Controllers\WebSite\LandingPageController;
+
+Route::get('detels',function(){
+    return view('website.projects.detels-project');
+});
 
 Route::get('/', [LandingPageController::class,'index'])->name('landingpage');
 Route::post('/', action: [LandingPageController::class,'storeContactForm'])->name('store.contact-form');
+Route::get('poroject/show/{id}', action: [LandingPageController::class,'showProject'])->name('project.show');
 
 Route::middleware('auth')->prefix('admin')->group(function(){
     Route::get('seetings/edit', [SeetingController::class, 'editSeeting'])->name('seetings.edit');
@@ -23,6 +29,8 @@ Route::middleware('auth')->prefix('admin')->group(function(){
     Route::resource('clients',ClientController::class);
     Route::resource('testimonials',TestimonialController::class);
     Route::resource('contacts',ContactController::class);
+    Route::resource('projects',ProjectController::class);
+    Route::resource('mechanisms',WorkMechanismController::class);
 
 
 });

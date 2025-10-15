@@ -85,7 +85,7 @@
                                         <div class="modal-body">
 
 
-                                            <form action="{{route('clients.update',$client->id)}}" class="p-5 bg-white" method="POST" enctype="multipart/form-data">
+                                            <form action="{{route('clients.update',$client->id)}}"  method="POST" enctype="multipart/form-data">
                                                 {{csrf_field()}}
                                                 {{method_field('PUT')}}
 
@@ -199,7 +199,7 @@
                             </div>
 
                         </div>
-                        <div class="modal-footer">
+                        <div class="modal-footer d-flex justify-content-start">
                             <button type="submit" class="btn btn-success btn-md">حفظ</button>
                             <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">اغلاق</button>
                         </div>

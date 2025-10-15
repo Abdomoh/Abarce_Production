@@ -16,9 +16,9 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">جميع اراء العملاء </h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">
-                    جميع اراء العملاء
-                </span>
+                <h4 class="content-title mb-0 my-auto">الية العمل  </h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                    ااضافة
+                    الية العمل </span>
             </div>
         </div>
 
@@ -34,7 +34,7 @@
                 <div class="card-header pb-0">
                     <div class="">
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal"><i
-                                class="fas fa-list"></i>&nbsp; اراء العملاء </button><br><br>
+                                class="fas fa-plus"></i>&nbsp;اضافة الية العمل  </button><br><br>
                     </div>
                 </div>
                 <div class="card-body">
@@ -43,48 +43,45 @@
                             <thead>
                                 <tr>
                                     <th class="border-bottom-0">#</th>
-                                    <th class="border-bottom-0">اسم العميل </th>
-                                    <th class="border-bottom-0">البريد</th>
-                                    <th class="border-bottom-0">رقم الهاتف</th>
-                                    <th class="border-bottom-0">نوع الخدمة</th>
-                                    <th class="border-bottom-0">رسالة الطلب</th>
+                                    <th class="border-bottom-0"> عنوان الية العمل</th>
+                                    <th class="border-bottom-0"> وصف الية العمل</th>
+                                    <th class="border-bottom-0">  الايقونة </th>
+
 
                                     <th class="border-bottom-0"></th>
                                     <th class="border-bottom-0"></th>
-
 
                                 </tr>
                             </thead>
                             <tbody>
 
-                                @foreach ($contacts as $contact)
+                                @foreach ($mechanisms as $mechanism)
                                     <tr>
-                                        <td>{{ $contact->id }}</td>
-                                        <td>{{ $contact->full_name }}</td>
-                                        <td>{{ $contact->email }}</td>
-                                        <td>{{ $contact->phone }}</td>
-                                        <td>{{ $contact->contact }}</td>
-                                        <td>{{Str::limit( $contact->message,50) }}</td>
-                                        <td data-toggle="modal" data-target="#detels_message{{$contact->id}}"><i class="fa fa-eye">view</i>
-                                        </td>
+                                        <td>{{ $mechanism->id }}</td>
+                                        <td>{{ $mechanism->title }}</td>
+                                        <td>{{ $mechanism->description }}</td>
+                                        <td><img src="{{ '/storage/'.$mechanism->image }}" width="40px" class="rounded-circle" alt="آلية العمل"></td>
+                                        <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                                data-target="#edit{{ $mechanism->id }}" title="">
+                                                <i class="fa fa-edit"></i></button></td>
+
                                         <td>
+
                                             <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                                data-target="#delete{{ $contact->id }}" title="">
+                                                data-target="#delete{{ $mechanism->id }}" title="">
                                                 <i class="fa fa-trash"></i></button>
                                         </td>
                                     </tr>
 
-
-
-                                    <!-- detels message with client -->
-
-                                    <div class="modal fade" id="detels_message{{$contact->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <!--  edit model -->
+                                    <div class="modal fade" id="edit{{ $mechanism->id }}" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title"
                                                         id="exampleModalLabel">
-                                                       رسالة العميل
+                                                        تعديل البيانات
                                                     </h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
@@ -93,39 +90,59 @@
                                                 </div>
                                                 <div class="modal-body">
 
-                                                    <div class="card-body">
-                                                        <div class="card">
-                                                            <div class="card-header">
-                                                           <p>{{ $contact->created_at->format('y-m-d') }}</p>
-                                                            </div>
-                                                            <div class="card-body">
 
-                                                              <p class="card-text">{{ $contact->message }}.</p>
+                                                    <form action="{{ route('mechanisms.update', $mechanism->id) }}"
+                                                     method="POST" enctype="multipart/form-data">
+                                                        {{ csrf_field() }}
+                                                        {{ method_field('PUT') }}
 
-                                                            </div>
-                                                          </div>
-                                                    </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label">  عنوان الية العمل</label>
+                                                            <input type="text" name="title"
+                                                                value="{{ $mechanism->title }}" class="form-control" />
+                                                            <input id="id" type="hidden" name="id"
+                                                                class="form-control" value="{{ $mechanism->id }}">
+
+                                                        </div>
+
+
+                                                        <div class="form-group">
+                                                            <label class="control-label">   وصف الية العمل   </label>
+                                                            <textarea name="description" id="" class="form-control">{{ $mechanism->description }}</textarea>
+                                                            <input id="id" type="hidden" name="id"
+                                                                class="form-control" value="{{ $mechanism->id }}">
+
+                                                        </div>
+
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlTextarea1"> ايقونة الية العمل </label>
+                                                    <input type="file" name="image" value="{{$mechanism->image}}" class="form-control" />
+                                                    <input id="id" type="hidden" name="id" class="form-control" value="{{$mechanism->id}}">
                                                 </div>
 
-                                            </div>
-                                            <div class="modal-footer d-flex justify-content-start" >
-
-                                                <button type="button" class="btn btn-secondary btn-md"
-                                                    data-dismiss="modal">اغلاق</button>
+                                                </div>
+                                                <div class="modal-footer d-flex justify-content-start">
+                                                    <button type="submit" class="btn btn-info btn-md ">تعديل</button>
+                                                    <button type="button" class="btn btn-secondary btn-md"
+                                                        data-dismiss="modal">اغلاق</button>
+                                                </div>
+                                                </form>
                                             </div>
                                         </div>
-
                                     </div>
 
+
+                                    <!-- end edit model -->
+
                                     <!-- Deleted -->
-                                    <div class="modal fade" id="delete{{ $contact->id }}" tabindex="-1"
+                                    <div class="modal fade" id="delete{{ $mechanism->id }}" tabindex="-1"
                                         role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title"
                                                         id="exampleModalLabel">
-                                                        حذف بيانات رسالة العميل
+                                                        حذف بيانات الية العمل
                                                     </h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
@@ -133,13 +150,13 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="{{ route('contacts.destroy', $contact->id) }}"
+                                                    <form action="{{ route('mechanisms.destroy', $mechanism->id) }}"
                                                         method="post">
                                                         {{ method_field('Delete') }}
                                                         @csrf
-                                                        هل تريد حذف بيانات الرسالة ؟!
+                                                        هل تريد حذف بيانات الية العمل ؟!
                                                         <input id="id" type="hidden" name="id"
-                                                            class="form-control" value="{{ $contact->id }}">
+                                                            class="form-control" value="{{ $mechanism->id }}">
                                                         <div class="modal-footer d-flex justify-content-start">
                                                             <button type="button" class="btn btn-secondary"
                                                                 data-dismiss="modal">اغلاق</button>
@@ -157,6 +174,53 @@
                             </tbody>
                         </table>
 
+                    </div>
+                </div>
+            </div>
+
+            <!-- add -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">اضافة الية العمل </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="{{ route('mechanisms.store') }}" method="post" enctype="multipart/form-data"
+                            autocomplete="">
+                            {{ csrf_field() }}
+                            <div class="modal-body">
+
+                                <div class="form-group">
+                                    <label class="control-label"> عنوان الية العمل </label>
+                                    <input type="text" name="title" value="" class="form-control" />
+
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="control-label"> وصف الية العمل </label>
+                                    <textarea name="description" id="" class="form-control"></textarea>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1"> ايقونة الية العمل </label>
+                                    <input type="file" name="image" value="" class="form-control" />
+
+                                </div>
+
+
+                            </div>
+                            <div class="modal-footer d-flex justify-content-start">
+                                <button type="submit" class="btn btn-success btn-md">حفظ</button>
+                                <button type="button" class="btn btn-secondary btn-md"
+                                    data-dismiss="modal">اغلاق</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

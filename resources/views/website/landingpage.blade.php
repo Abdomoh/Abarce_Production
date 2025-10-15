@@ -13,15 +13,15 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="hero-badge">
-                            <i class="bi bi-star-fill"></i> شركة رائدة في الإنتاج الإعلامي
+                            <i class="bi bi-star-fill"></i> {{ __('main.fovirt_word') }}
                         </div>
-                        <h1 class="hero-title">abarce Production </h1>
+                        <h1 class="hero-title">{{  $seeting->name}} </h1>
                         <p class="hero-subtitle">
-                            لانو للكل طريقة حكاية ,نحن هنــــــــــــا
+                          {{ __('main.logo_abarce') }}
                         </p>
                         <div class="hero-buttons">
-                            <a href="#contact" class="btn btn-hero"> اطلب الان</a>
-                            <a href="#portfolio" class="btn btn-secondary-hero">شاهد أعمالنا</a>
+                            <a href="#contact" class="btn btn-hero">  {{ __('main.delivery') }}</a>
+                            <a href="#portfolio" class="btn btn-secondary-hero"> {{ __('main.witch_work') }}</a>
 
                         </div>
                     </div>
@@ -36,7 +36,7 @@
             <div class="row">
                 <div class="col-lg-6 mb-4">
                     <img src="{{ $about->image ? asset('/storage/'.$about->image) : asset('website/image/abarce/about.jpg') }}"
-                        alt="من نحن" class="img-fluid rounded-3 shadow" />
+                        alt="من نحن" loading="lazy"  class="img-fluid rounded-3 shadow" />
                 </div>
                 <div class="col-lg-6">
                     <h2 class="section-title">{{ __('main.about') }} </h2>
@@ -54,8 +54,8 @@
                                     <i class="bi bi-award-fill"></i>
                                 </div>
                                 <div>
-                                    <h5>جودة عالية</h5>
-                                    <p>معايير احترافية في كل مشروع</p>
+                                    <h5> {{ __('main.higth_qulity') }}</h5>
+                                    <p>{{ __('main.qulit_text') }} </p>
                                 </div>
                             </div>
                         </div>
@@ -65,8 +65,8 @@
                                     <i class="bi bi-lightbulb-fill"></i>
                                 </div>
                                 <div>
-                                    <h5>إبداع لا حدود له</h5>
-                                    <p>أفكار مبتكرة تناسب احتياجاتك</p>
+                                    <h5> {{ __('main.amizing') }}</h5>
+                                    <p>   {{ __('main.amizing_text') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -114,93 +114,28 @@
     <section id="how-we-work" class="section-padding bg-light">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="section-title">كيف نعمل</h2>
-                <p class="section-subtitle">استراتيجيتنا الرقمية لتحقيق أهدافك</p>
+                <h2 class="section-title"> {{ __('main.how_to_work') }}</h2>
+                <p class="section-subtitle">{{ __('main.how_to_work_text') }}</p>
             </div>
             <div class="strategy-section">
-                <div class="strategy-item" data-aos="fade-up" data-aos-delay="100">
-                    <div class="strategy-number">1</div>
-                    <div class="strategy-icon">
-                        <i class="bi bi-search"></i>
-                    </div>
-                    <div class="strategy-content">
-                        <h4 class="strategy-title">بحث السوق واستراتيجية التسويق</h4>
-                        <p class="strategy-description">
-                            نقوم بتحليل السوق والمنافسين لوضع استراتيجية تسويقية فعالة تناسب
-                            أهدافك وتصل إلى جمهورك المستهدف.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="strategy-item" data-aos="fade-up" data-aos-delay="200">
-                    <div class="strategy-number">2</div>
-                    <div class="strategy-icon">
-                        <i class="bi bi-calendar-check"></i>
-                    </div>
-                    <div class="strategy-content">
-                        <h4 class="strategy-title">خطة المحتوى</h4>
-                        <p class="strategy-description">
-                            نصمم خطة محتوى متكاملة تشمل جميع القنوات والمنصات لضمان وصول
-                            رسالتك بشكل احترافي ومؤثر.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="strategy-item" data-aos="fade-up" data-aos-delay="300">
-                    <div class="strategy-number">3</div>
-                    <div class="strategy-icon">
-                        <i class="bi bi-share"></i>
-                    </div>
-                    <div class="strategy-content">
-                        <h4 class="strategy-title">وسائل التواصل الاجتماعي والاتصال</h4>
-                        <p class="strategy-description">
-                            ندير حساباتك على منصات التواصل الاجتماعي ونواصل مع جمهورك
-                            بفعالية لبناء علاقات قوية.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="strategy-item" data-aos="fade-up" data-aos-delay="400">
-                    <div class="strategy-number">4</div>
-                    <div class="strategy-icon">
-                        <i class="bi bi-people"></i>
-                    </div>
-                    <div class="strategy-content">
-                        <h4 class="strategy-title">إدارة المجتمع</h4>
-                        <p class="strategy-description">
-                            نبني مجتمعًا نشطًا حول علامتك التجارية من خلال التفاعل المستمر
-                            والاستجابة لجمهورنا.
-                        </p>
-                    </div>
-                </div>
-
+                @foreach ($mechanisms as $mechanism )
                 <div class="strategy-item" data-aos="fade-up" data-aos-delay="500">
-                    <div class="strategy-number">5</div>
-                    <div class="strategy-icon">
-                        <i class="bi bi-chat-dots"></i>
-                    </div>
-                    <div class="strategy-content">
-                        <h4 class="strategy-title">المشاركة والعملاء المحتملين</h4>
-                        <p class="strategy-description">
-                            نزيد من تفاعل الجمهور ونحولهم إلى عملاء محتملين من خلال حملات
-                            تسويقية مبتكرة.
-                        </p>
-                    </div>
-                </div>
 
-                <div class="strategy-item" data-aos="fade-up" data-aos-delay="600">
-                    <div class="strategy-number">6</div>
+
+                    <div class="strategy-number">{{ $mechanism->id }}</div>
                     <div class="strategy-icon">
-                        <i class="bi bi-lightbulb"></i>
+                      <img src="{{ '/storage/'.$mechanism->image }}" style="width: 60px; height: 60px; margin-top: 10px; margin-bottom: 25px;"  alt="" loading="lazy">
                     </div>
                     <div class="strategy-content">
-                        <h4 class="strategy-title">استراتيجية المحتوى الرقمي</h4>
+                        <h4 class="strategy-title">  {{ $mechanism->title }}</h4>
                         <p class="strategy-description">
-                            نطور استراتيجية محتوى رقمية شاملة تضمن لك التميز في السوق وتحقيق
-                            أهدافك التسويقية.
+                            {{ $mechanism->description }}.
                         </p>
                     </div>
+
                 </div>
+                @endforeach
+
             </div>
         </div>
     </section>
@@ -226,7 +161,7 @@
                             <div class="client-item" data-aos="zoom-in" data-aos-delay="800">
                                 <div class="client-logo">
                                     <div class="client-logo-inner">
-                                      <img src="{{  '/storage/'.$client->logo }}"
+                                      <img src="{{  '/storage/'.$client->logo }}" loading="lazy"
                               style="width: 50px; height: 50px; margin-top: 10px; margin-bottom: 25px;" alt="">
                                     </div>
                                 </div>
@@ -291,76 +226,30 @@
     <section id="portfolio" class="section-padding bg-light">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="section-title">أعمالنا</h2>
-                <p class="section-subtitle">نماذج من إبداعاتنا السابقة</p>
+                <h2 class="section-title">{{ __('main.portfolio') }}</h2>
+                <p class="section-subtitle">   {{ __('main.example_work') }}</p>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="100">
-                        <img src="image/profile/1.jpg" alt="مشروع 1" class="portfolio-img" />
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-info">
-                                <h4 class="portfolio-title">فيلم وثائقي</h4>
-                                <p>إنتاج فيلم وثائقي عن التراث الثقافي</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="200">
-                        <img src="image/profile/2.jpg" alt="مشروع 2" class="portfolio-img" />
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-info">
-                                <h4 class="portfolio-title">حملة إعلانية</h4>
-                                <p>حملة إعلانية لمنتج تجاري جديد</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="300">
-                        <img src="image/profile/3.jpg" alt="مشروع 3" class="portfolio-img" />
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-info">
-                                <h4 class="portfolio-title">برنامج تلفزيوني</h4>
-                                <p>برنامج حواري أسبوعي ناجح</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="400">
-                        <img src="image/profile/4.jpg" alt="مشروع 4" class="portfolio-img" />
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-info">
-                                <h4 class="portfolio-title">فيديو كليب</h4>
-                                <p>إنتاج فيديو كليب لفنان مشهور</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="500">
-                        <img src="image/profile/5.jpg" alt="مشروع 5" class="portfolio-img" />
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-info">
-                                <h4 class="portfolio-title">تغطية مؤتمر</h4>
-                                <p>تغطية شاملة لمؤتمر دولي</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @foreach ($projects as $project)
                 <div class="col-lg-4 col-md-6">
                     <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="600">
-                        <img src="image/profile/6.jpg" alt="مشروع 6" class="portfolio-img" />
+                        <a href="{{ route('project.show',$project->id)}}">
+                        <img src="{{ '/storage/'.$project->images->first()->image }}"  loading="lazy"     alt=" {{ $project->title }}" class="portfolio-img" />
                         <div class="portfolio-overlay">
                             <div class="portfolio-info">
-                                <h4 class="portfolio-title">فيلم روائي</h4>
-                                <p>إنتاج فيلم روائي قصير</p>
+    <h4 class="portfolio-title"  > {{ $project->title }}</h4>
+                                <p>  {{ Str::limit($project->description,20) }} </p>
+
                             </div>
                         </div>
+                    </a>
                     </div>
                 </div>
+
+
+
+
+                @endforeach
             </div>
         </div>
     </section>
@@ -369,15 +258,15 @@
     <section id="contact" class="section-padding">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="section-title">اتصل بنا</h2>
-                <p class="section-subtitle">نحن هنا لخدمتك والإجابة على استفساراتك</p>
+                <h2 class="section-title"> {{ __('main.contact') }}</h2>
+                <p class="section-subtitle">    {{ __('main.here_anwser') }} </p>
             </div>
             <div class="row">
 
                 <div class="col-lg-7">
                     <div class="card border-0 shadow-sm" data-aos="fade-left">
                         <div class="card-body p-4">
-                            <h4 class="mb-4">أرسل لنا رسالة</h4>
+                            <h4 class="mb-4">  {{ __('main.send_me') }}</h4>
                             <form action="{{ route('store.contact-form') }}" method="POST">
                                 @csrf
                                 <div class="row">
@@ -396,6 +285,7 @@
                                     <div class="col-md-6 mb-3">
                                         <select name="service_id" class="form-control">
                                             @foreach ($services as $service)
+                                            <option value="">اختر الخدمة </option>
                                                 <option value="{{ $service->id }}">
 
                                                     {{ $service->title }}
@@ -409,7 +299,7 @@
                                 </div>
                                 <!-- Using custom button class -->
                                 <button type="submit" class="btn btn-custom-accent w-100">
-                                    إرسال الرسالة
+                                   {{ __('main.send_message') }}
                                 </button>
                             </form>
                         </div>
@@ -417,14 +307,14 @@
                 </div>
                 <div class="col-lg-5 mb-4">
                     <div class="contact-info" data-aos="fade-right">
-                        <h4 class="mb-4">معلومات التواصل</h4>
+                        <h4 class="mb-4"> {{ __('main.information_social') }}</h4>
                         <div class="contact-item">
                             <div class="contact-icon">
                                 <i class="bi bi-geo-alt-fill"></i>
                             </div>
                             <div>
-                                <h5>العنوان</h5>
-                                <p>شارع الملك فهد، الرياض، المملكة العربية السعودية</p>
+                                <h5>{{ __('main.address') }}</h5>
+                             <p>{{ $seeting->address }}</p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -432,8 +322,8 @@
                                 <i class="bi bi-telephone-fill"></i>
                             </div>
                             <div>
-                                <h5>الهاتف</h5>
-                                <p dir="ltr">+249 911 390 896</p>
+                                <h5>{{ __('main.phone') }}</h5>
+                                <p dir="ltr">{{ $seeting->phone }}</p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -441,8 +331,8 @@
                                 <i class="bi bi-envelope-fill"></i>
                             </div>
                             <div>
-                                <h5>البريد الإلكتروني</h5>
-                                <p>AbarceProduction@gmail.com</p>
+                                <h5> {{ __('main.Email') }}</h5>
+                                <p>{{ $seeting->email }}</p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -450,19 +340,19 @@
                                 <i class="bi bi-clock-fill"></i>
                             </div>
                             <div>
-                                <h5>ساعات العمل</h5>
-                                <p>الأحد - الخميس: 9:00 ص - 6:00 م</p>
-                                <p>الجمعة - السبت: مغلق</p>
+                                <h5> </h5>
+                            <p>{{ __('main.from_to') }}</p>
+
                             </div>
                         </div>
                         <div class="mt-4">
-                            <h5>تابعنا على</h5>
+                            <h5> {{ __('main.fllow') }}</h5>
                             <div class="social-icons">
-                                <a href="#"><i class="bi bi-facebook"></i></a>
-                                <a href="#"><i class="bi bi-twitter"></i></a>
-                                <a href="#"><i class="bi bi-instagram"></i></a>
-                                <a href="#"><i class="bi bi-youtube"></i></a>
-                                <a href="#"><i class="bi bi-linkedin"></i></a>
+                                <a href="{{ $seeting->facebbok }}"><i class="bi bi-facebook"></i></a>
+                                <a href="{{ $seeting->twitter }}"><i class="bi bi-twitter"></i></a>
+                                <a href="{{ $seeting->instagram }}"><i class="bi bi-instagram"></i></a>
+                                <a href="{{ $seeting->whatsapp }}"><i class="bi bi-whatsapp"></i></a>
+                                <a href="{{ $seeting->facebbok }}"><i class="bi bi-linkedin"></i></a>
                             </div>
                         </div>
                     </div>

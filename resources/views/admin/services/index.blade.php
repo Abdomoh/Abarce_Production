@@ -87,7 +87,7 @@
                                         <div class="modal-body">
 
 
-                                            <form action="{{route('services.update',$service->id)}}" class="p-5 bg-white" method="POST" enctype="multipart/form-data">
+                                            <form action="{{route('services.update',$service->id)}}"  method="POST" enctype="multipart/form-data">
                                                 {{csrf_field()}}
                                                 {{method_field('PUT')}}
 
@@ -113,7 +113,7 @@
                                                 </div>
 
                                         </div>
-                                        <div class="modal-footer">
+                                        <div class="modal-footer d-flex justify-content-start">
                                             <button type="submit" class="btn btn-info btn-md ">تعديل</button>
                                             <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">اغلاق</button>
                                         </div>
@@ -164,7 +164,7 @@
                                                 @csrf
                                                 هل تريد حذف بيانات الخدمة ؟!
                                                 <input id="id" type="hidden" name="id" class="form-control" value="{{$service->id}}">
-                                                <div class="modal-footer">
+                                                <div class="modal-footer d-flex justify-content-start">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
                                                     <button type="submit" class="btn btn-danger">حذف
                                                         البيانات</button>
@@ -217,9 +217,9 @@
                             </div>
 
                         </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-success btn-sm">تاكيد</button>
-                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">اغلاق</button>
+                        <div class="modal-footer d-flex justify-content-start">
+                            <button type="submit" class="btn btn-success btn-md">حفظ</button>
+                            <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">اغلاق</button>
                         </div>
                     </form>
                 </div>

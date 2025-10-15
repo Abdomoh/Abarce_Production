@@ -6,6 +6,7 @@ use App\Models\Contact;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateContactRequest;
 
 class ContactController extends Controller
 {
@@ -39,9 +40,13 @@ class ContactController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Contact $contact)
     {
-        //
+
+
+    return view('admin.contacts.show', compact('contact'));
+
+
     }
 
     /**
@@ -55,9 +60,9 @@ class ContactController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateContactRequest $request,  Contact $contact)
     {
-        //
+
     }
 
     /**
@@ -65,6 +70,10 @@ class ContactController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $service= Contact::find($id);
+        $service->delete();
+        toastr()->addError('تم حزف  الرسالة بنجاح!');
+
+        return redirect()->route('contacts.index');
     }
 }

@@ -1,6 +1,8 @@
 <!-- Title -->
 <title>    لوحة - التحكم  </title>
 <!-- Favicon -->
+<link rel="icon" href="{{ URL::asset('/storage/'.$seeting->logo) }}" type="image/x-icon" >
+
 <!--  font    -->
 <link href="{{URL::asset('font/font.css')}}" rel="stylesheet">
 
