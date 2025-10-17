@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
             $about = About::first();
             $contacts =  Contact::take('4')->get();
             $contact_count=Contact::count();
-            $projects=Project::with(['service','client'])->take('3')->latest()->get();
+            $latest_projects=Project::with(['service','client'])->take('3')->latest()->get();
             $projects_count = Project::count();
             $clients_count = Client::count();
             $services_count = Service::count();
@@ -41,7 +41,7 @@ class AppServiceProvider extends ServiceProvider
                 'about' => $about,
                 'contacts'=>$contacts,
                 'contact_count'=>$contact_count,
-                'projects'=>$projects,
+                'latest_projects'=>$latest_projects,
                 'projects_count'=>$projects_count,
                 'clients_count'=>$clients_count,
                 'services_count'=>$services_count

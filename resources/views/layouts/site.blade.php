@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>{{ $seeting->name }}</title>
+    <title>{{ $seeting->name }} | الرئسية</title>
 <link rel="icon" href="{{ URL::asset('/storage/'.$seeting->logo) }}" type="image/x-icon" >
 
     <!-- Bootstrap CSS -->
@@ -67,6 +67,21 @@
     </nav>
 
 
+
+    <!--           Whatsapp icon                 -->
+
+    <div class="whatsapp-widget">
+        <a href="https://wa.me/249911390896?text=مرحباً، أود الاستفسار عن خدماتكم" class="whatsapp-link" target="_blank">
+            <div class="whatsapp-icon">
+                <i class="bi bi-whatsapp"></i>
+            </div>
+        </a>
+        <div class="whatsapp-tooltip">  {{ __('main.whatsapp') }} </div>
+    </div>
+
+
+    <!---  end    Whatsapp icon         -->
+
     <!-- Footer - NEW DESIGN -->
     <footer>
         <div class="container">
@@ -123,16 +138,20 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-widget footer-projects">
                         <h5><i class="bi bi-collection-play"></i> {{ __('main.last_project') }} </h5>
-                        @foreach ($projects as $project)
+                        @foreach ($latest_projects as $project)
                         <div class="project-item">
+
                             <div class="project-img">
-                                <img src="{{ '/storage/'.$project->images->first()->image }}"
+                                <a href="{{ route('project.show',$project->id) }}">
+                            <img src="{{ '/storage/'.$project->images->first()->image }}"
                                   loading="lazy"  alt="{{ $project->title }}" />
+                                  </a>
                             </div>
                             <div class="project-info">
                                 <h6>{{ $project->title }} </h6>
                                 <p> {{ Str::limit($project->description,20) }}</p>
                             </div>
+
                         </div>
                         @endforeach
                     </div>
