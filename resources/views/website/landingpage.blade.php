@@ -15,12 +15,12 @@
                         <div class="hero-badge">
                             <i class="bi bi-star-fill"></i> {{ __('main.fovirt_word') }}
                         </div>
-                        <h1 class="hero-title">{{  $seeting->name}} </h1>
+                        <h1 class="hero-title">{{ $seeting->name }} </h1>
                         <p class="hero-subtitle">
-                          {{ __('main.logo_abarce') }}
+                            {{ __('main.logo_abarce') }}
                         </p>
                         <div class="hero-buttons">
-                            <a href="#contact" class="btn btn-hero">  {{ __('main.delivery') }}</a>
+                            <a href="#contact" class="btn btn-hero"> {{ __('main.delivery') }}</a>
                             <a href="#portfolio" class="btn btn-secondary-hero"> {{ __('main.witch_work') }}</a>
 
                         </div>
@@ -35,8 +35,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 mb-4">
-                    <img src="{{ $about->image ? asset('/storage/'.$about->image) : asset('website/image/abarce/about.jpg') }}"
-                        alt="من نحن" loading="lazy"  class="img-fluid rounded-3 shadow" />
+                    <img src="{{ $about->image ? asset('/storage/' . $about->image) : asset('website/image/abarce/about.jpg') }}"
+                        alt="من نحن - {{ $seeting->name }}" title="{{ $about->title }}" loading="lazy"
+                        class="img-fluid rounded-3 shadow" />
                 </div>
                 <div class="col-lg-6">
                     <h2 class="section-title">{{ __('main.about') }} </h2>
@@ -66,7 +67,7 @@
                                 </div>
                                 <div>
                                     <h5> {{ __('main.amizing') }}</h5>
-                                    <p>   {{ __('main.amizing_text') }}</p>
+                                    <p> {{ __('main.amizing_text') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -95,10 +96,11 @@
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card service-card" data-aos="fade-up" data-aos-delay="600">
                             <div class="card-body p-4">
-                              <img src="{{  '/storage/'.$service->image }}"
-                              style="width: 50px; height: 50px; margin-top: 10px; margin-bottom: 25px;" alt="">
+                                <img src="{{ '/storage/' . $service->image }}" alt="خدمة {{ $service->title }}"
+                                    title="{{ $service->title }}" width="60" height="60" loading="lazy"
+                                    class="mb-3" style="margin-top: 10px; margin-bottom: 25px;">
 
-                                <h4 class="service-title"> {{$service->title }}</h4>
+                                <h4 class="service-title"> {{ $service->title }}</h4>
                                 <p>
                                     {{ $service->description }}
                                 </p>
@@ -118,22 +120,26 @@
                 <p class="section-subtitle">{{ __('main.how_to_work_text') }}</p>
             </div>
             <div class="strategy-section">
-                @foreach ($mechanisms as $mechanism )
-                <div class="strategy-item" data-aos="fade-up" data-aos-delay="500">
+                @foreach ($mechanisms as $mechanism)
+                    <div class="strategy-item" data-aos="fade-up" data-aos-delay="500">
 
 
-                    <div class="strategy-number">{{ $mechanism->id }}</div>
-                    <div class="strategy-icon">
-                      <img src="{{ '/storage/'.$mechanism->image }}" style="width: 60px; height: 60px; margin-top: 10px; margin-bottom: 25px;"  alt="" loading="lazy">
+                        <div class="strategy-number">{{ $mechanism->id }}</div>
+                        <div class="strategy-icon">
+
+
+                            <img src="{{ '/storage/' . $mechanism->image }}" alt="{{ $mechanism->title }}"
+                                title="{{ $mechanism->title }}" width="60" height="60" loading="lazy"
+                                style="margin-top: 10px; margin-bottom: 25px;">
+                        </div>
+                        <div class="strategy-content">
+                            <h4 class="strategy-title"> {{ $mechanism->title }}</h4>
+                            <p class="strategy-description">
+                                {{ $mechanism->description }}.
+                            </p>
+                        </div>
+
                     </div>
-                    <div class="strategy-content">
-                        <h4 class="strategy-title">  {{ $mechanism->title }}</h4>
-                        <p class="strategy-description">
-                            {{ $mechanism->description }}.
-                        </p>
-                    </div>
-
-                </div>
                 @endforeach
 
             </div>
@@ -161,8 +167,9 @@
                             <div class="client-item" data-aos="zoom-in" data-aos-delay="800">
                                 <div class="client-logo">
                                     <div class="client-logo-inner">
-                                      <img src="{{  '/storage/'.$client->logo }}" loading="lazy"
-                              style="width: 50px; height: 50px; margin-top: 10px; margin-bottom: 25px;" alt="">
+                                        <img src="{{ '/storage/' . $client->logo }}" loading="lazy"
+                                            style="width: 50px; height: 50px; margin-top: 10px; margin-bottom: 25px;"
+                                            alt="">
                                     </div>
                                 </div>
                                 <h4 class="client-name">{{ $client->name }}</h4>
@@ -190,30 +197,29 @@
 
                     <!-- Testimonials -->
                     <div class="testimonials-section" data-aos="fade-up" data-aos-delay="400">
-                        <h3 class="text-center mb-4">{{ __('main.tallck_client') }}  </h3>
+                        <h3 class="text-center mb-4">{{ __('main.tallck_client') }} </h3>
                         <div class="row">
-                           @foreach ($testimonials as $testimonial )
-                            <div class="col-lg-6 mb-4">
-                                <div class="testimonial-item">
-                                    <div class="testimonial-quote">
-                                        <i class="bi bi-quote"></i>
-                                    </div>
-                                    <p class="testimonial-text">
-                                   {{ $testimonial->message }}
-                                    </p>
-                                    <div class="testimonial-author">
-                                        <div class="author-avatar">
-                                            <i class="bi bi-person"></i>
+                            @foreach ($testimonials as $testimonial)
+                                <div class="col-lg-6 mb-4">
+                                    <div class="testimonial-item">
+                                        <div class="testimonial-quote">
+                                            <i class="bi bi-quote"></i>
                                         </div>
-                                        <div class="author-info">
-                                            <h5>              {{ $testimonial->name }}</h5>
-                                            <p>               {{ $testimonial->postion }}</p>
+                                        <p class="testimonial-text">
+                                            {{ $testimonial->message }}
+                                        </p>
+                                        <div class="testimonial-author">
+                                            <div class="author-avatar">
+                                                <i class="bi bi-person"></i>
+                                            </div>
+                                            <div class="author-info">
+                                                <h5> {{ $testimonial->name }}</h5>
+                                                <p> {{ $testimonial->postion }}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                           @endforeach
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -227,28 +233,26 @@
         <div class="container">
             <div class="text-center mb-5">
                 <h2 class="section-title">{{ __('main.portfolio') }}</h2>
-                <p class="section-subtitle">   {{ __('main.example_work') }}</p>
+                <p class="section-subtitle"> {{ __('main.example_work') }}</p>
             </div>
             <div class="row">
                 @foreach ($projects as $project)
-                <div class="col-lg-4 col-md-6">
-                    <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="600">
-                        <a href="{{ route('project.show',$project->id)}}">
-                        <img src="{{ '/storage/'.$project->images->first()->image }}"  loading="lazy"     alt=" {{ $project->title }}" class="portfolio-img" />
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-info">
-    <h4 class="portfolio-title"  > {{ $project->title }}</h4>
-                                <p>  {{ Str::limit($project->description,20) }} </p>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="600">
+                            <a href="{{ route('project.show', $project->id) }}">
+                                <img src="{{ '/storage/' . $project->images->first()->image }}"
+                                    alt="مشروع {{ $project->title }}" title="{{ $project->title }}" loading="lazy"
+                                    class="portfolio-img">
+                                <div class="portfolio-overlay">
+                                    <div class="portfolio-info">
+                                        <h4 class="portfolio-title"> {{ $project->title }}</h4>
+                                        <p> {{ Str::limit($project->description, 20) }} </p>
 
-                            </div>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
-                    </a>
                     </div>
-                </div>
-
-
-
-
                 @endforeach
             </div>
         </div>
@@ -259,33 +263,35 @@
         <div class="container">
             <div class="text-center mb-5">
                 <h2 class="section-title"> {{ __('main.contact') }}</h2>
-                <p class="section-subtitle">    {{ __('main.here_anwser') }} </p>
+                <p class="section-subtitle"> {{ __('main.here_anwser') }} </p>
             </div>
             <div class="row">
 
                 <div class="col-lg-7">
                     <div class="card border-0 shadow-sm" data-aos="fade-left">
                         <div class="card-body p-4">
-                            <h4 class="mb-4">  {{ __('main.send_me') }}</h4>
+                            <h4 class="mb-4"> {{ __('main.send_me') }}</h4>
                             <form action="{{ route('store.contact-form') }}" method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <input type="text" name="full_name" class="form-control" placeholder="الاسم الكامل" required />
+                                        <input type="text" name="full_name" class="form-control"
+                                            placeholder="الاسم الكامل" required />
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <input type="email"  name="email" class="form-control" placeholder="البريد الإلكتروني"
-                                            required />
+                                        <input type="email" name="email" class="form-control"
+                                            placeholder="البريد الإلكتروني" required />
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <input type="tel" name="phone" class="form-control" placeholder="رقم الهاتف" />
+                                        <input type="tel" name="phone" class="form-control"
+                                            placeholder="رقم الهاتف" />
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <select name="service_id" class="form-control">
                                             @foreach ($services as $service)
-                                            <option value="">اختر الخدمة </option>
+                                                <option value="">اختر الخدمة </option>
                                                 <option value="{{ $service->id }}">
 
                                                     {{ $service->title }}
@@ -299,7 +305,7 @@
                                 </div>
                                 <!-- Using custom button class -->
                                 <button type="submit" class="btn btn-custom-accent w-100">
-                                   {{ __('main.send_message') }}
+                                    {{ __('main.send_message') }}
                                 </button>
                             </form>
                         </div>
@@ -314,7 +320,7 @@
                             </div>
                             <div>
                                 <h5>{{ __('main.address') }}</h5>
-                             <p>{{ $seeting->address }}</p>
+                                <p>{{ $seeting->address }}</p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -341,7 +347,7 @@
                             </div>
                             <div>
                                 <h5> </h5>
-                            <p>{{ __('main.from_to') }}</p>
+                                <p>{{ __('main.from_to') }}</p>
 
                             </div>
                         </div>
