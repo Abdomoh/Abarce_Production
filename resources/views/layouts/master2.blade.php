@@ -13,7 +13,7 @@
 	<body class="main-body app sidebar-mini">
 
         <style type="text/css">
-         
+
             body {
                 font-family: 'Cairo', sans-serif;
                 font-size: 20px;
@@ -23,7 +23,7 @@
         </style>
 		<!-- Loader -->
 		<div id="global-loader">
-			<!--<img src="{{URL::asset('admin/img/loader.svg')}}" class="loader-img" alt="Loader"> -->
+			<!--<img src="{{URL::asset('admin_asset/img/loader.svg')}}" class="loader-img" alt="Loader"> -->
 		</div>
 		<!-- /Loader -->
 		@include('layouts.main-sidebar2')

@@ -86,5 +86,5 @@
             <!-- Internal Select2 js-->
 
             <!--Internal  Datatable js -->
-            <script src="{{ URL::asset('admin/js/table-data.js') }}"></script>
+            <script src="{{ URL::asset('admin_asset/js/table-data.js') }}"></script>
         @endsection
