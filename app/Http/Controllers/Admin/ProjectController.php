@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Client;
 use App\Models\Project;
 use App\Models\Service;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -16,7 +17,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::latest()->orderBy('created_at','desc')->get();
+        $projects = Project::latest()->orderBy('created_at', 'desc')->get();
         $services = Service::select('id', 'title')->get();
         $clients = Client::select('id', 'name')->get();
         return view('admin.projects.index', compact('projects', 'services', 'clients'));
@@ -39,8 +40,8 @@ class ProjectController extends Controller
         $project = Project::create([
             'title' => $validated['title'],
             'description' => $validated['description'] ?? null,
-            'service_id'=>$validated['service_id'],
-            'client_id'=>$validated['client_id']
+            'service_id' => $validated['service_id'],
+            'client_id' => $validated['client_id']
         ]);
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $file) {
@@ -48,9 +49,9 @@ class ProjectController extends Controller
                 $project->images()->create(['image' => $path]);
             }
         }
+        cache()->forget('landing_projects');
         toastr()->AddSuccess('تم اضافة المشروع بنجاح!');
         return redirect()->route(route: 'projects.index');
-
     }
 
     /**
@@ -89,7 +90,7 @@ class ProjectController extends Controller
                 $project->images()->create(['image' => $path]);
             }
         }
-
+        cache()->forget('landing_projects');
         toastr()->success('تم تعديل المشروع بنجاح!');
         return redirect()->route('projects.index');
     }
@@ -99,6 +100,8 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        if ($project->image)
+            Storage::disk('public')->delete($project->image);
 
         $project->delete();
         toastr()->addError('تم حزف  المشروع بنجاح!');

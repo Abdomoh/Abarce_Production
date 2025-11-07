@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Client;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
+use App\Models\Client;
 
 class ClientController extends Controller
 {
@@ -36,11 +36,11 @@ class ClientController extends Controller
 
         if ($request->hasFile('logo')) {
             $data['logo'] = $request->file('logo')->store('clients', 'public');
-            }
-            Client::create($data);
-
-            toastr()->AddSuccess('تم اضافة العميل بنجاح!');
-            return redirect()->route('clients.index');
+        }
+        Client::create($data);
+        cache()->forget('landing_clients');
+        toastr()->AddSuccess('تم اضافة العميل بنجاح!');
+        return redirect()->route('clients.index');
     }
 
     /**
@@ -69,11 +69,11 @@ class ClientController extends Controller
 
         if ($request->hasFile('logo')) {
             $data['logo'] = $request->file('logo')->store('clients', 'public');
-            }
-       $client->update($data);
-
-            toastr()->AddSuccess('تم تعديل بيانات العميل بنجاح!');
-            return redirect()->route('clients.index');
+        }
+        $client->update($data);
+        cache()->forget('landing_clients');
+        toastr()->AddSuccess('تم تعديل بيانات العميل بنجاح!');
+        return redirect()->route('clients.index');
     }
 
     /**
@@ -81,11 +81,10 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-      $client=Client::find($id);
-      $client->delete();
-      toastr()->addError('تم حزف  العميل بنجاح!');
+        $client = Client::find($id);
+        $client->delete();
+        toastr()->addError('تم حزف  العميل بنجاح!');
 
         return redirect()->route('clients.index');
-
     }
 }

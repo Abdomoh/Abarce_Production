@@ -190,12 +190,22 @@
 
                             <div class="form-group">
                                 <label class="control-label"> اسم العميل  </label>
-                                <input type="text" name="name" value="" class="form-control" />
+                                <input type="text" name="name" value="{{ old('name') }}" required class="form-control" />
+                                @error('name')
+                                <span class="form-text text-danger">{{ $message }}</span>
+                                @enderror
 
                             </div>
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea1">شعار العميل</label>
-                                <input type="file" name="logo" value="" class="form-control" />
+                                <input type="file" name="logo" value="{{ old('logo') }}"  id="images" required  class="form-control" />
+                                @error('logo')
+                                <span class="form-text text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <div id="preview" class="mt-2 d-flex flex-wrap"></div>
                             </div>
 
                         </div>
@@ -217,6 +227,32 @@
         @endsection
         @section('js')
         <!-- Internal Select2 js-->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const input = document.getElementById('images');
+            const preview = document.getElementById('preview');
+
+            input.addEventListener('change', function() {
+                preview.innerHTML = ''; // مسح الصور السابقة
+                const files = input.files;
+
+                for (let i = 0; i < files.length; i++) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.style.width = '100px';
+                        img.style.margin = '5px';
+                        img.style.borderRadius = '5px';
+                        preview.appendChild(img);
+                    }
+                    reader.readAsDataURL(files[i]);
+                }
+            });
+        });
+    </script>
+
 
 
         <script src="{{ URL::asset('admin_asset/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>

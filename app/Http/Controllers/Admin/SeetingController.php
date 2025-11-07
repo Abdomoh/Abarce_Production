@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Models\Seeting;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 use App\Http\Requests\SeetingUpdateRequest;
 
 class SeetingController extends Controller
@@ -22,7 +23,7 @@ class SeetingController extends Controller
         }
 
         $seeting->update($data);
-
+    Cache::forget('global_seeting');
 
         toastr()->success('تم تعديل البيانات بنجاح.');
 

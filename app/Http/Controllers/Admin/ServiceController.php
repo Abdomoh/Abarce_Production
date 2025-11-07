@@ -36,11 +36,11 @@ class ServiceController extends Controller
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('services', 'public');
-            }
-            Service::create($data);
-
-            toastr()->AddSuccess('تم اضافة الخدمة بنجاح!');
-            return redirect()->route('services.index');
+        }
+        Service::create($data);
+        cache()->forget('landing_services');
+        toastr()->AddSuccess('تم اضافة الخدمة بنجاح!');
+        return redirect()->route('services.index');
     }
 
     /**
@@ -69,20 +69,19 @@ class ServiceController extends Controller
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('services', 'public');
-            }
-          $service->update($data);
-
-            toastr()->AddSuccess('تم تعديل الخدمة بنجاح!');
-            return redirect()->route('services.index');
+        }
+        $service->update($data);
+        cache()->forget('landing_services');
+        toastr()->AddSuccess('تم تعديل الخدمة بنجاح!');
+        return redirect()->route('services.index');
     }
-
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy($id)
     {
-        $service= Service::find($id);
+        $service = Service::find($id);
         $service->delete();
         toastr()->addError('تم حزف  الخدمة بنجاح!');
 

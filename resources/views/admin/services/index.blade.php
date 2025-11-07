@@ -59,7 +59,11 @@
                                 <td>{{$service->id}}</td>
                                 <td>{{$service->title}}</td>
                                 <td>{{$service->description}}</td>
-                                <td data-toggle="modal" data-target="#img_show{{$service->id}}"><img src="{{'/storage/'.$service->image}}" width="40px" class="rounded-circle">
+                                <td data-toggle="modal" data-target="#img_show{{$service->id}}">
+                                
+
+                                    <img src="{{ asset('/storage/'.$service->image) }}" width="40px" class="rounded-circle">
+
                                 </td>
 
                                 <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit{{$service->id}}" title="">
@@ -200,22 +204,34 @@
 
                             <div class="form-group">
                                 <label class="control-label">عنوان الخدمة </label>
-                                <input type="text" name="title" value="" class="form-control" />
+                                <input type="text" name="title" value="{{ old('title') }}" required class="form-control" />
+                                @error('title')
+                                <span class="form-text text-danger">{{ $message }}</span>
+                                @enderror
 
                             </div>
 
                             <div class="form-group">
                                 <label class="control-label">الوصف </label>
-                                <input type="text" name="description" value="" class="form-control" />
+
+                                <textarea name="description" required id="" class="form-control"></textarea>
+                                @error('description')
+                                <span class="form-text text-danger">{{ $message }}</span>
+                                @enderror
 
                             </div>
 
 
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea1">صورة</label>
-                                <input type="file" name="image" value="" class="form-control" />
+                                <input type="file" name="image" value="{{ old('image') }}"  id="images" required class="form-control" />
+                                @error('image')
+                                <span class="form-text text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
-
+                            <div class="form-group col-md-6">
+                                <div id="preview" class="mt-2 d-flex flex-wrap"></div>
+                            </div>
                         </div>
                         <div class="modal-footer d-flex justify-content-start">
                             <button type="submit" class="btn btn-success btn-md">حفظ</button>
@@ -236,6 +252,30 @@
         @section('js')
         <!-- Internal Select2 js-->
 
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const input = document.getElementById('images');
+                const preview = document.getElementById('preview');
+
+                input.addEventListener('change', function() {
+                    preview.innerHTML = ''; // مسح الصور السابقة
+                    const files = input.files;
+
+                    for (let i = 0; i < files.length; i++) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const img = document.createElement('img');
+                            img.src = e.target.result;
+                            img.style.width = '100px';
+                            img.style.margin = '5px';
+                            img.style.borderRadius = '5px';
+                            preview.appendChild(img);
+                        }
+                        reader.readAsDataURL(files[i]);
+                    }
+                });
+            });
+        </script>
 
         <script src="{{ URL::asset('admin_asset/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
         <script src="{{ URL::asset('admin_asset/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>

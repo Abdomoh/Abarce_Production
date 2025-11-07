@@ -220,18 +220,28 @@
 
                                 <div class="form-group">
                                     <label class="control-label">اسم العميل </label>
-                                    <input type="text" name="name" value="" class="form-control" />
+                                    <input type="text" name="name" value="{{ old('name') }}"  class="form-control" />
+                                    @error('name')
+                                    <span class="form-text text-danger">{{ $message }}</span>
+                                    @enderror
 
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">الوصف الوظيفي </label>
-                                    <input type="text" name="postion" value="" class="form-control" />
+
+                                    <textarea name="postion" id="" required class="form-control"></textarea>
+                                    @error('postion')
+                                    <span class="form-text text-danger">{{ $message }}</span>
+                                    @enderror
 
                                 </div>
 
                                 <div class="form-group">
                                     <label class="control-label">رسالة العميل </label>
-                                    <textarea name="message" id="" class="form-control"></textarea>
+                                    <textarea name="message" id="" required class="form-control"></textarea>
+                                    @error('message')
+                                    <span class="form-text text-danger">{{ $message }}</span>
+                                    @enderror
 
                                 </div>
 

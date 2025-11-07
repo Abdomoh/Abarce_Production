@@ -196,23 +196,34 @@
 
                                 <div class="form-group">
                                     <label class="control-label"> عنوان الية العمل </label>
-                                    <input type="text" name="title" value="" class="form-control" />
+                                    <input type="text" name="title" value="{{ old('title') }}" required class="form-control" />
+                                    @error('title')
+                                    <span class="form-text text-danger">{{ $message }}</span>
+                                    @enderror
 
                                 </div>
 
 
                                 <div class="form-group">
                                     <label class="control-label"> وصف الية العمل </label>
-                                    <textarea name="description" id="" class="form-control"></textarea>
+                                    <textarea name="description" id="" required class="form-control"></textarea>
+                                    @error('description')
+                                    <span class="form-text text-danger">{{ $message }}</span>
+                                    @enderror
 
                                 </div>
 
                                 <div class="form-group">
                                     <label for="exampleFormControlTextarea1"> ايقونة الية العمل </label>
-                                    <input type="file" name="image" value="" class="form-control" />
+                                    <input type="file" name="image" value="{{ old('logo') }}"  id="images"  required class="form-control" />
+                                    @error('logo')
+                                    <span class="form-text text-danger">{{ $message }}</span>
+                                    @enderror
 
                                 </div>
-
+                                <div class="form-group col-md-6">
+                                    <div id="preview" class="mt-2 d-flex flex-wrap"></div>
+                                </div>
 
                             </div>
                             <div class="modal-footer d-flex justify-content-start">
@@ -227,6 +238,30 @@
         @endsection
         @section('js')
             <!-- Internal Select2 js-->
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const input = document.getElementById('images');
+                    const preview = document.getElementById('preview');
+
+                    input.addEventListener('change', function() {
+                        preview.innerHTML = ''; // مسح الصور السابقة
+                        const files = input.files;
+
+                        for (let i = 0; i < files.length; i++) {
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                const img = document.createElement('img');
+                                img.src = e.target.result;
+                                img.style.width = '100px';
+                                img.style.margin = '5px';
+                                img.style.borderRadius = '5px';
+                                preview.appendChild(img);
+                            }
+                            reader.readAsDataURL(files[i]);
+                        }
+                    });
+                });
+            </script>
 
 
             <script src="{{ URL::asset('admin_asset/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>

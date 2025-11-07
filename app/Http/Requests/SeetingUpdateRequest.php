@@ -30,6 +30,7 @@ class SeetingUpdateRequest extends FormRequest
             'instagram' => ['nullable'],
             'whatsapp' =>  'nullable|string',
             'tweeter' =>  'nullable|string',
+            'linkedin' =>  'nullable|string',
             'logo'=> 'image'
         ];
     }

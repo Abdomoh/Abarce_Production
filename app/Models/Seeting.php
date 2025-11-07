@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Seeting extends Model
 {
-    protected $fillable =['name','logo','phone','email','whatsapp','facebook','tweeter','instagram','address'];
+    protected $fillable =['name','logo','phone','email','whatsapp','facebook','tweeter','instagram','linkedin','address'];
 }

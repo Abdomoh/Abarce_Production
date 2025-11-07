@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use cache;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorTtestimonialRequest;
 use App\Http\Requests\UpdateTtestimonialRequest;
-use App\Models\Testimonial;
 
 class TestimonialController extends Controller
 {
@@ -35,6 +36,7 @@ class TestimonialController extends Controller
         $validator = $request->validated();
         $data = $request->all();
             Testimonial::create($data);
+            cache()->forget('landing_testimonials');
             toastr()->AddSuccess('تم اضافة رأي العميل  بنجاح!');
             return redirect()->route('testimonials.index');
     }
@@ -64,7 +66,7 @@ class TestimonialController extends Controller
         $data = $request->all();
           $testimonial= Testimonial::find($id);
           $testimonial->update($data);
-
+           cache()->forget('landing_testimonials');
             toastr()->AddSuccess('تم تعديل رأي العميل  بنجاح!');
             return redirect()->route('testimonials.index');
     }

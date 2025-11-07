@@ -46,12 +46,13 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label> الصورة  : <span class="text-danger">*</span></label>
-                                    <img src="{{ asset('storage/'.$about->image) }}" width="50" class="mb-2">
+                                    <img src="{{ asset('/storage/'.$about->image) }}" width="50" class="mb-2">
                                     <input type="file" name="image" class="form-control" id="inputEmail5"
                                         value="{{ $about->image }}">
                                     @error('image')
                                         <span class="form-text text-danger">{{ $message }}</s>
                                         @enderror
+                                  
                                 </div>
                             </div>
                             <div class="form-row">
@@ -61,6 +62,19 @@
 
                                         <textarea name="sub_title" id="" class="form-control">{{ $about->sub_title }}</textarea>
                                     @error('sub_title')
+                                        <span class="form-text text-danger">{{ $message }}</s>
+                                        @enderror
+                                </div>
+
+                            </div>
+
+                              <div class="form-row">
+
+                                <div class="form-group col-md-6">
+                                    <label>  النص الذي يظهر علي الصفحة الرئسية    : <span class="text-danger">*</span></label>
+
+                                        <textarea name="description" id="" class="form-control">{{ $about->description }}</textarea>
+                                    @error('description')
                                         <span class="form-text text-danger">{{ $message }}</s>
                                         @enderror
                                 </div>

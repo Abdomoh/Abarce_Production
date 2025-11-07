@@ -50,6 +50,7 @@
 
                                     <th class="border-bottom-0"></th>
                                     <th class="border-bottom-0"></th>
+                                    <th class="border-bottom-0"></th>
 
                                 </tr>
                             </thead>
@@ -259,13 +260,19 @@
                                     <div class="form-group col-md-6">
 
                                         <label class="control-label"> وصف المشروع </label>
-                                        <textarea name="description" id="" class="form-control"></textarea>
+                                        <textarea name="description" id="" required class="form-control"></textarea>
+                                        @error('description')
+                                        <span class="form-text text-danger">{{ $message }}</span>
+                                        @enderror
 
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label class="control-label"> عنوان المشروع </label>
-                                        <input type="text" name="title" value="" class="form-control" />
+                                        <input type="text" name="title" value="{{ old('title') }}" required class="form-control" />
+                                        @error('title')
+                                        <span class="form-text text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -275,6 +282,7 @@
 
                                         <select name="service_id" class="form-control">
                                             @foreach ($services as $service)
+                                            <option  value="">اختر نوع الخدمة </option>
                                                 <option value="{{ $service->id }}">{{ $service->title }}</option>
                                             @endforeach
                                         </select>
@@ -285,6 +293,7 @@
 
                                         <select name="client_id" class="form-control">
                                             @foreach ($clients as $client)
+                                            <option value="">اختر العميل</option>
                                                 <option value="{{ $client->id }}">{{ $client->name }}</option>
                                             @endforeach
                                         </select>
@@ -294,8 +303,11 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label class="control-label"> ( اكثر من صورة)صور من المشروع </label>
-                                        <input type="file" name="images[]" class="form-control" id="images"
+                                        <input type="file" name="images[]" class="form-control"  required id="images"
                                             multiple />
+                                            @error('images')
+                                            <span class="form-text text-danger">{{ $message }}</span>
+                                            @enderror
 
                                     </div>
                                     <div class="form-group col-md-6">

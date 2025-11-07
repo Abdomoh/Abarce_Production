@@ -87,7 +87,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label> رابط الانستغرام : <span class="text-danger">*</span></label>
-                                    <input type="text" name="Instagram" class="form-control" id="inputEmail5"
+                                    <input type="text" name="instagram" class="form-control" id="inputEmail5"
                                         value="{{ $seeting->instagram }}">
                                     @error('Instagram')
                                         <span class="form-text text-danger">{{ $message }}</s>
@@ -118,6 +118,14 @@
                             </div>
 
                             <div class="form-row">
+                                 <div class="form-group col-md-6">
+                                    <label> لكيندان : <span class="text-danger">*</span></label>
+                                    <input type="text" name="linkedin" class="form-control" id="inputEmail5"
+                                        value="{{ $seeting->linkedin }}">
+                                    @error('linkedin')
+                                        <span class="form-text text-danger">{{ $message }}</s>
+                                        @enderror
+                                </div>
                                 <div class="form-group col-md-6">
                                     <label> العنوان : <span class="text-danger">*</span></label>
                                     <input type="text" name="address" class="form-control" id="inputEmail5"

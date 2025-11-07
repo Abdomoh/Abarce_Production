@@ -23,8 +23,9 @@ class AboutUpdateRequest extends FormRequest
     {
         return [
             'title' => 'nullable|string',
-            'sub-title' =>  'nullable|string',
+            'sub_title' =>  'nullable|string',
             'image' =>  'nullable|image',
+            'description','nullable|string',
         ];
     }
 }
